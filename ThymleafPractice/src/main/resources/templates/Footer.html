@@ -1,0 +1,19 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8"   xmlns:th="http://www.thymeleaf.org"/>
+	<title>FOOTER TEMPLATE</title>
+</head>
+<body>
+	
+	<footer id="fragmentTag" th:fragment="footer1(${title},${subtitle)}">
+	<div  class="container">
+	<h1 th:text="${title}"></h1>
+	<h2 th:text="${subtitle}"></h2>
+	<h1>This footer is design by Shruti Amrutkar</h1>
+	<h2>shrutiamrutkar177@gmail.com</h2>
+	
+	</div>
+	</footer>
+</body>
+</html>

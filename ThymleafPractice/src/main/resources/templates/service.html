@@ -1,0 +1,21 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8"  xmlns:th="http://www.thymeleaf.org" />
+	<title>Document</title>
+</head>
+<body>
+
+<!--th:replace  -->
+
+<h1>THIS IS SERVICE PAGE</h1>
+<footer id="hostTag" th:replace="footer::footer1('This is Title','This is subtitle')"></footer> 
+
+<!-- <!-- th:insert -->
+<!--  <footer id="hostTag" th:insert="footer::footer1"></footer> -->
+ 
+ <!-- th:include -->
+ <!-- <footer id="hostTag" th:include="footer::footer1"></footer> -- -->>
+	
+</body>
+</html>

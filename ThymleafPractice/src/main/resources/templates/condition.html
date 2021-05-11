@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+	<h1>CONDITIONAL STATEMENT IN THYMELEAF</h1>
+
+<!--ELVIS OPERATOR  -->
+	<h1>
+		Use is:<span th:style="${isActive} ? 'color:green' : 'color:red' " th:text="${isActive} ? 'ACTIVE' : 'NO ACTIVE' "></span>
+	</h1>
+	
+	
+	<!--IF-UNLESS  -->
+	<h1 th:if="${Gender}=='M'">MALE</h1>
+	<h1 th:unless="${Gender}=='M'">Female</h1>
+	
+	<div th:switch="${#lists.size(Mylist)}">
+	<h1 th:case="'0'">List Contains 0 elements</h1>
+	<h1 th:case="'1'">List Contain elements</h1>
+	<h1 th:case="*">List Contain More than 1 Element</h1>
+	
+	</div>
+
+</body>
+</html>

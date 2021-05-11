@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1" xmlns:th="http://www.thymeleaf.org">
+<title>Insert title here</title>
+</head>
+<body>
+<h1>EXAMPLE OF ITTERATION</h1>
+<h1 th:text="${name}"></h1>
+<ul>
+<li th:each="n,status:${name}">
+<span th:style="${status.odd} ? 'color:red' :' '"  th:text="${status.index+1}+' '+${n}"></span>
+
+</li>
+
+</ul>
+</body>
+</html>
