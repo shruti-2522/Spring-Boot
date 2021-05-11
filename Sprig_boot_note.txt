@@ -1,0 +1,8 @@
+How to start with Sprig Boot
+
+1.Create a Maven Project and add starter dependencies.
+2.Using spring iitilizr (Website)
+3.Use IDE like STS(Sprinng Tool suit)
+4.Sprinng Boot cmd interface
+
+@SpringBootApplication=configuration+enableanotation+component scan
