@@ -1,0 +1,44 @@
+ if(result.hasErrors())
+			 {
+				 System.out.println("result="+result.toString());
+				 m.addAttribute("contact",contact);
+				 return "normal/add_contact";
+			 }
+			
+			
+			String name = principle.getName();
+			User u1 = this.userRepository.getUserByUserName(name);
+
+			// processing and uploading file
+			if (file.isEmpty()) {
+				// if file is empty then try our message
+				System.out.println("Image is not uploaded");
+				contact.setImage("contact.png");
+			} else {
+				// file the file to folder and update the file name and contact
+
+				contact.setImage(file.getOriginalFilename());
+
+				File f1 = new ClassPathResource("static/img").getFile();
+				Path path = Paths.get(f1.getAbsolutePath() + File.separator + file.getOriginalFilename());
+
+				Files.copy(file.getInputStream(), path, StandardCopyOption.REPLACE_EXISTING);
+				System.out.println("Image Uploaded");
+
+			}
+
+			contact.setUser(u1);
+			u1.getContacts().add(contact);
+			this.userRepository.save(u1);
+			System.out.println("data=" + contact);
+			System.out.println("Added to Daatabse...");
+
+			session.setAttribute("message", new Message("Contact Add Successfully!! Add More..", "success"));
+			return "normal/add_contact";
+
+		} catch (Exception e) {
+			System.out.println("Error" + e.getMessage());
+			e.printStackTrace();
+			session.setAttribute("message", new Message("Something Went wrong!! Try again..", "danger"));
+
+		}
