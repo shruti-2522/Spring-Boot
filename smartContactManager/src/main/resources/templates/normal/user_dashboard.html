@@ -3,30 +3,20 @@
 	th:replace="normal/base::layout(~{::section})">
 <head>
 <meta charset="UTF-8" />
-<title>Document</title>
+<title></title>
 </head>
 <body>
 
-	<section>
-		<div class="container">
-			<div class="card">
-				<div class="card-body">
-					<div class="container text-center">
-						<img class="profile_picture" style="height: 200px; width: 210px;"
-							alt="" th:src="@{'/img/contact_logo.png'}" src="">
-					</div>
-					
-					
-					<h1 class="text-center mt-3 text-secondary font-italic font-weight-light">Starting Add Your Contact On cloud...</h1>
-				    <div class="container text-center">
-				    <a th:href="@{/user/add-contact}" class="btn bg-primary text-white btn-block  text-upperCase mt-4">ADD NEW CONTACT</a>
-				    </div>
-				</div>
-
-			</div>
-
-
-		</div>
+	 <section class="cal d-flex justify-content-center align-items-center">
+	   <div class="text-center">
+	    <h1 class=" font-weight-bold">Smart Contact Manager</h1>
+	    <p>
+	      Starting add your contact on cloud....
+	    </p>
+	    
+	    <a th:href="@{/user/add-contact}" class="btn btn-primary btn-lg text-white">Add New Contact</a>
+	   </div>
+	
 	</section>
 
 </body>

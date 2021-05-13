@@ -12,6 +12,8 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name = "CONTACT")
 public class Contact {
@@ -48,6 +50,8 @@ public class Contact {
 	private String description;
 	
 	@ManyToOne
+	@JsonIgnore
+	//it is used for doesn't get data serilize
 	private User user;
 
 	public User getUser() {
