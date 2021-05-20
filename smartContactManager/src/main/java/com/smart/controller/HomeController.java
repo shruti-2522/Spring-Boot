@@ -76,9 +76,10 @@ public class HomeController {
 				return "signup";
 			}
 
-			System.out.println("Agreement=" + agreement);
-			System.out.println("User" + user);
-
+			/*
+			 * System.out.println("Agreement=" + agreement); System.out.println("User" +
+			 * user);
+			 */
 			user.setRole("ROLE_USER");
 			user.setEnabled(true);
 			user.setImageUrl("default.png");

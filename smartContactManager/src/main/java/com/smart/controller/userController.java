@@ -17,6 +17,7 @@ import org.springframework.core.io.ClassPathResource;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -38,6 +39,9 @@ import com.smart.helper.Message;
 @Controller
 @RequestMapping("/user")
 public class userController {
+	
+	@Autowired
+	private BCryptPasswordEncoder bCryptPasswordEncoder;
 
 	@Autowired
 	private UserRepository userRepository;
@@ -115,8 +119,10 @@ public class userController {
 			contact.setUser(u1);
 			u1.getContacts().add(contact);
 			this.userRepository.save(u1);
-			System.out.println("data=" + contact);
-			System.out.println("Added to Daatabse...");
+			/*
+			 * System.out.println("data=" + contact);
+			 * System.out.println("Added to Daatabse...");
+			 */
 
 			session.setAttribute("message", new Message("Contact Add Successfully!! Add More..", "success"));
 			return "normal/add_contact";
@@ -144,7 +150,7 @@ public class userController {
 		String uname = principle.getName();
 		User user = this.userRepository.getUserByUserName(uname);
 
-		Pageable p1 = PageRequest.of(page, 5);
+		Pageable p1 = PageRequest.of(page, 3);
 
 		Page<Contact> contacts = this.contactRepository.findContactsByUser(user.getId(), p1);
 		m1.addAttribute("contacts", contacts);
@@ -272,5 +278,41 @@ public class userController {
 		 m.addAttribute("title","Profile Page");
 		 return "normal/profile";
 	 }
+	
+	//Setting Handler
+	@GetMapping("/setting")
+	 public String openSetting()
+	 {
+		 return "normal/setting";
+	 }
+	
+	//change password-handler
+	@PostMapping("/change-password")
+	public String changePassword(@RequestParam("oldpwd") String oldpwd,@RequestParam("newpwd") String newpwd,Principal principal,HttpSession session)
+	{
+	   System.out.println("old password="+oldpwd);
+	   System.out.println("new Password="+newpwd);
+	   
+	   String username = principal.getName();
+	   User currentUser = this.userRepository.getUserByUserName(username);
+	   System.out.println(currentUser.getPassword());
+	   
+	   if(this.bCryptPasswordEncoder.matches(oldpwd, currentUser.getPassword()))
+	   {
+		   //Change the password
+		   currentUser.setPassword(this.bCryptPasswordEncoder.encode(newpwd));
+		   this.userRepository.save(currentUser);
+			session.setAttribute("message", new Message("Your password successfully Chnged!!...","success"));
+			
+	   }
+	   else
+	  {
+		   //error
+			session.setAttribute("message", new Message("Please enter correct old password!!.","danger"));
+			 return "redirect:/user/setting";
+	   }
+	   return "redirect:/user/index";
+	}
+	
 
 }
